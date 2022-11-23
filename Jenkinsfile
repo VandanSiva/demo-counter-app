@@ -87,6 +87,22 @@ pipeline {
                 }
             }
         }
+        stage('Push image to dockerhub'){
+
+            steps{
+                
+                script{
+
+                    withCredentials([string(credentialsId: 'git_creds', variable: 'dockerhub_cred')]) 
+                    {
+                        sh 'docker login -u 150419 -p ${dockerhub_cred}'
+                        sh 'docker image push 150419/$JOB_NAME:v1.$BUILD_ID'
+                        sh 'docker image push 150419/$JOB_NAME:latest'
+                   
+                    }
+                }
+            }
+        }
 
     }
 }
