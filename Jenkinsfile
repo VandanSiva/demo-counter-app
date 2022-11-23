@@ -23,5 +23,11 @@ pipeline {
                 sh 'mvn verify -DskipUnitTests'
             }
         }
+        stage('Mvaen Building'){
+            
+            steps{
+                sh 'mvn clean install'
+            }
+        }
     }
 }
